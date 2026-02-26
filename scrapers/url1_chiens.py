@@ -4,9 +4,16 @@ import pandas as pd
 
 
 def scrap_dog_data (nb_page):
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
-    driver = webdriver.Chrome(options=options)
+    options = Options()
+    options.add_argument("--headless")   # indispensable
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+    
+    service = Service(ChromeDriverManager().install())
+
+    driver = webdriver.Chrome(service=service, options=options)
     df = pd.DataFrame()
     for i in range(1,nb_page+1):
         url = f'https://sn.coinafrique.com/categorie/chiens?page={i}'
