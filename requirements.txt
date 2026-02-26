@@ -9,4 +9,4 @@ selenium
 pybase64
 altair>=5
 streamlit>=1.30.0
-webdriver_manager
+webdriver-manager
