@@ -5,6 +5,8 @@ scipy
 matplotlib
 pandas
 streamlit
-seaborn
+selenium
 pybase64
-
+altair>=5
+streamlit>=1.30.0
+webdriver-manager
