@@ -1,28 +1,15 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+
 from bs4 import BeautifulSoup as bs
+from requests import get
 import pandas as pd
 
 
 def scrap_dog_animals (nb_page):
-    options = Options()
-    options.add_argument("--headless")   # indispensable
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
-
-    service = Service(ChromeDriverManager().install())
-
-    driver = webdriver.Chrome(service=service, options=options)
     df = pd.DataFrame()
     for i in range(1,nb_page+1):
         url = f'https://sn.coinafrique.com/categorie/poules-lapins-et-pigeons?page={i}'
-        driver.get(url)
-        resp = driver.page_source
-        soup = bs(resp,'html.parser')
+        resp = get(url)
+        soup = bs(resp.content,'html.parser')
         containers = soup.find_all('div', class_='col s6 m4 l3')
         data = []
         for container in containers:
