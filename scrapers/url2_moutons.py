@@ -3,7 +3,7 @@ from requests import get
 import pandas as pd
 
 
-def scrap_dog_sheeps (nb_page):
+def scrap_sheeps_data (nb_page):
     
     df = pd.DataFrame()
     for i in range(1,nb_page+1):

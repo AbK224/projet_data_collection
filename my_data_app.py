@@ -5,9 +5,9 @@ import pandas as pd
 from bs4 import BeautifulSoup as bs
 from db import create_table, get_connection
 from scrapers.url1_chiens import scrap_dog_data
-from scrapers.url2_moutons import scrap_dog_sheeps
-from scrapers.url3_pou_la_pi import scrap_dog_animals
-from scrapers.url4_autres import scrap_dog_others
+from scrapers.url2_moutons import scrap_sheeps_data
+from scrapers.url3_pou_la_pi import scrap_animals_data
+from scrapers.url4_autres import scrap_others_data
 from cleaning import clean_data
 from dashboard import show_dashboard
 
@@ -106,15 +106,15 @@ if menu == "Scrapper les données":
     df1["date_scraped"] = datetime.now()
     
     
-    df2 = scrap_dog_sheeps(nbre_pages)
+    df2 = scrap_sheeps_data(nbre_pages)
     df2["date_scraped"] = datetime.now()
    
 
-    df3 = scrap_dog_animals(nbre_pages)
+    df3 = scrap_animals_data(nbre_pages)
     df3["date_scraped"] = datetime.now()
 
 
-    df4 = scrap_dog_others(nbre_pages)
+    df4 = scrap_others_data(nbre_pages)
     df4["date_scraped"] = datetime.now()
  
     df = pd.concat([df1, df2, df3, df4], ignore_index=True)
@@ -164,6 +164,28 @@ elif menu == "Voir le dashboard":
         if df is not None:
             df = clean_data(df)
             show_dashboard(df)
+            st.markdown("### 📈 Nombre d’animaux par catégorie")
+
+            # Récupération directe des DataFrames
+            df1 = scrap_dog_data(nbre_pages)
+            df2 = scrap_sheeps_data(nbre_pages)
+            df3 = scrap_animals_data(nbre_pages)
+            df4 = scrap_others_data(nbre_pages)
+
+            # Comptage
+            data_count = {
+                "Chiens": len(df1),
+                "Moutons": len(df2),
+                "Poulets / Lapins / Pigeons": len(df3),
+                "Autres animaux": len(df4),
+            }
+
+            count_df = pd.DataFrame.from_dict(
+                data_count, orient="index", columns=["Nombre"]
+            )
+
+            
+            st.bar_chart(count_df)
         else:
             st.warning("Aucune donnée disponible.")
     else:
