@@ -3,7 +3,7 @@ from requests import get
 import pandas as pd
 
 
-def scrap_dog_others (nb_page):
+def scrap_others_data (nb_page):
     df = pd.DataFrame()
     for i in range(1,nb_page+1):
         url = f'https://sn.coinafrique.com/categorie/autres-animaux?page={i}'

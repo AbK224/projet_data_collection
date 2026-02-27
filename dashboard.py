@@ -7,3 +7,6 @@ def show_dashboard(df: pd.DataFrame):
     st.write(f"Nombre total d'animaux: {df.shape[0]}")
     st.write(f"les 10 animaux les plus chers:")
     st.write(df.nlargest(10, "prix"))
+
+
+

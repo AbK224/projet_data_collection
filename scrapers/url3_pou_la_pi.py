@@ -4,7 +4,7 @@ from requests import get
 import pandas as pd
 
 
-def scrap_dog_animals (nb_page):
+def scrap_animals_data (nb_page):
     df = pd.DataFrame()
     for i in range(1,nb_page+1):
         url = f'https://sn.coinafrique.com/categorie/poules-lapins-et-pigeons?page={i}'
