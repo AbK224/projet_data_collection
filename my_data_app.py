@@ -88,7 +88,6 @@ menu = st.sidebar.selectbox("Choisissez une action",
 
 #Navigation selon le choix    
 if menu == "Scrapper les données":
-    #Initialisation des variables de session
     # Fonction de loading des données
     def load_(dataframe, title, key) :
         st.markdown("""
@@ -179,7 +178,7 @@ elif menu == "Voir le dashboard":
                 "Poulets / Lapins / Pigeons": len(df3),
                 "Autres animaux": len(df4),
             }
-
+            
             count_df = pd.DataFrame.from_dict(
                 data_count, orient="index", columns=["Nombre"]
             )
@@ -192,13 +191,16 @@ elif menu == "Voir le dashboard":
         st.warning("Vous devez d'abord scraper les données.")
 
 elif menu == "Evaluer l'application":
+    st.divider()
     st.subheader("Choisissez un formulaire d'évaluation")
     col1, col2 = st.columns(2)
     
     with col1:
+        #st.markdown("### Formulaire d'évaluation Kobo")
         st.link_button("Formulaire kobo", "https://ee.kobotoolbox.org/x/GsObLBeC")
     
-    with col1:
+    with col2:
+        #st.markdown("### Formulaire d'évaluation Microsoft Forms")
         st.link_button("MS form", "https://docs.google.com/forms/d/e/1FAIpQLSczP0ywecRIDzypbh1poyOniI3EVZDAH-pcmu23EZIshN5qQA/viewform?usp=publish-editor")
 
     
